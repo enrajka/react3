@@ -1,7 +1,11 @@
 import React from 'react';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 import './App.css';
 import Sidebar from './Sidebar';
 import CourseArea from './CourseArea';
+import Cart from './Cart';
+import CourseInfo from './CourseInfo';
 
 class App extends React.Component {
   constructor(props) {
@@ -9,7 +13,9 @@ class App extends React.Component {
     this.state = {
       allCourses: {},
       filteredCourses: {},
-      subjects: []
+      subjects: [],
+      currCourse: {},
+      addedItems: {}
     };
   }
 
@@ -35,6 +41,15 @@ class App extends React.Component {
     this.setState({filteredCourses: courses})
   }
 
+  setCurrCourse(data) { 
+    console.log(data);
+    this.setState({currCourse:data});
+  }
+
+  sendToCart(data) {
+    
+  }
+
   render() {
     return (
       <>
@@ -45,10 +60,21 @@ class App extends React.Component {
           crossOrigin="anonymous"
         />
 
-        <Sidebar setCourses={(courses) => this.setCourses(courses)} courses={this.state.allCourses} subjects={this.state.subjects}/>
-        <div style={{marginLeft: '20vw'}}>
-          <CourseArea data={this.state.filteredCourses}/>
-        </div>
+        <Tabs defaultActiveKey="courseSearch" id="tabs">
+        <Tab eventKey="courseSearch" title="Course Search">
+          <Sidebar setCourses={(courses) => this.setCourses(courses)} courses={this.state.allCourses} subjects={this.state.subjects}/>
+          <div style={{marginLeft: '20vw'}}>
+            <CourseArea data={this.state.filteredCourses} setCurrCourse={(data)=> this.setCurrCourse(data)}/>
+          </div>
+          <div style ={{marginLeft: '47vw', marginTop: '-201vw'}}>
+            <CourseInfo data={this.state.currCourse}> </CourseInfo>
+          </div>
+        </Tab>
+        <Tab eventKey="cart" title="My Cart">
+          <Cart data={this.state.addedItems}> </Cart>
+        </Tab>
+        </Tabs>
+        
       </>
     )
   }
