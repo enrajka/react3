@@ -74,18 +74,6 @@ class CourseInfo extends React.Component {
                 return listS;
             }
         }
-        
-
-        // let listS = [];
-        // if (data.subsections != undefined) {
-        //     let sec = Object.keys(data.subsections);
-        //     let secBody = Object.values(data.subsections);
-        //     console.log(sec[0] + " "  + secBody[0]);
-        //     // for (var i = 0; i < sec.length; i++) {
-        //     //     listS.push(<Card><Accordion.Toggle as={Card.Header} eventKey={i}>{sec[i]}</Accordion.Toggle><Accordion.Collapse eventKey={i}><Card.Body>{this.secBody[i].location}<Card.Text>{this.getTimes(secBody[i])}</Card.Text></Card.Body></Accordion.Collapse></Card>);
-        //     // }
-        //     return listS;
-        // } 
         return "";
     }
 
