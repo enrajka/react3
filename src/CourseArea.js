@@ -8,10 +8,9 @@ class CourseArea extends React.Component {
 
     for(const course of Object.entries(this.props.data)) {
       courses.push (
-        <Course key={course[0]} data={course[1]}/>
+        <Course key={course[0]} data={course[1]} setCurrCourse={(data)=> this.props.setCurrCourse(data)}/>
       )
     }
-
     return courses;
   }
 
