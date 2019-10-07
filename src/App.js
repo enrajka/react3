@@ -42,7 +42,6 @@ class App extends React.Component {
   }
 
   setCurrCourse(data) { 
-    console.log(data);
     this.setState({currCourse:data});
   }
 
@@ -66,7 +65,7 @@ class App extends React.Component {
           <div style={{marginLeft: '20vw'}}>
             <CourseArea data={this.state.filteredCourses} setCurrCourse={(data)=> this.setCurrCourse(data)}/>
           </div>
-          <div style ={{marginLeft: '47vw', marginTop: '-201vw'}}>
+          <div style={{marginLeft: '48vw', marginTop: '-101vw'}}>
             <CourseInfo data={this.state.currCourse}> </CourseInfo>
           </div>
         </Tab>
