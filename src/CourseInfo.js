@@ -26,7 +26,7 @@ class CourseInfo extends React.Component {
             // console.log(sec.length);           
             // //listG.push(<ListGroup.Item>{sec[i]}</ListGroup.Item>);
             for (var i = 0; i < sec.length; i++) {
-                listG.push(<Card><Accordion.Toggle as={Card.Header} eventKey="0">{sec[i]}</Accordion.Toggle><Accordion.Collapse eventKey="0"><Card.Body>{this.getBody()}</Card.Body></Accordion.Collapse></Card>);
+                listG.push(<Card><Accordion.Toggle as={Card.Header} eventKey="0">{sec[i]}</Accordion.Toggle><Accordion.Collapse eventKey="0"><Card.Body>{this.getBody()}{secBody[i].instructor} : {secBody[i].location}</Card.Body></Accordion.Collapse></Card>);
             }
             return listG;
 
