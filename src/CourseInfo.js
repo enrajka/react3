@@ -38,6 +38,18 @@ class CourseInfo extends React.Component {
     }
 
     getButton (element) {
+        if (this.props.data.sections != undefined) {
+            var sectionss = Object.keys(this.props.data.sections);
+            var secc = Object.entries(this.props.data.sections);
+            //console.log("the first element is",secc[1][0]);
+             for (var s = 0; s < sectionss.length; s++) {
+                 if (secc[s][0] !== element) {
+                     delete secc[s];
+                 }
+             }
+             
+            console.log(secc);
+    }
         return <Button className="addToCart" onClick={()=>this.addToCart(element)}>Add To Cart</Button>;
     }
 
@@ -46,9 +58,8 @@ class CourseInfo extends React.Component {
        return <Button className="addToCart" onClick={()=>this.addToCart(element)}>Add To Cart</Button>;
     }
 
-    addToCart () {
-        this.props.setCart(this.props.data);
-        
+    addToCart (data) {
+        this.props.setCart(data);
     }
 
     getTimes(data) {
