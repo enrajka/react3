@@ -45,8 +45,12 @@ class App extends React.Component {
     this.setState({currCourse:data});
   }
 
-  sendToCart(data) {
-    
+  setCart(data) {
+    let addedItems = [];
+    addedItems.push(data);
+    console.log(data);
+    return addedItems;
+    //this.setState({addedItems: data});
   }
 
   render() {
@@ -65,8 +69,8 @@ class App extends React.Component {
           <div style={{marginLeft: '20vw'}}>
             <CourseArea data={this.state.filteredCourses} setCurrCourse={(data)=> this.setCurrCourse(data)}/>
           </div>
-          <div style={{marginLeft: '48vw', marginTop: '-101vw'}}>
-            <CourseInfo data={this.state.currCourse}> </CourseInfo>
+          <div style ={{marginLeft: '47vw', marginTop: '-201vw'}}>
+            <CourseInfo data={this.state.currCourse} setCart={(data)=> this.setCart(data)}/>
           </div>
         </Tab>
         <Tab eventKey="cart" title="My Cart">
