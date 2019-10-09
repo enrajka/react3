@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
 import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
 
 class CourseInfo extends React.Component {
     constructor(props) {
         super(props);
+
     }
    
        
-
     getListG() {
         let listG = [];
         //console.log(this.props.data.sections);
@@ -18,7 +18,7 @@ class CourseInfo extends React.Component {
             let sec = Object.keys(this.props.data.sections);
             let secBody = Object.values(this.props.data.sections);
             for (var i = 0; i < sec.length; i++) {
-                listG.push(<Card><Accordion.Toggle as={Card.Header} eventKey={i}>{sec[i]}</Accordion.Toggle><Accordion.Collapse eventKey={i}><Card.Body>{this.getBody(secBody[i])}<Card.Text>{this.getTimes(secBody[i])}</Card.Text>{this.getTagS(secBody[i])}</Card.Body></Accordion.Collapse></Card>);
+                listG.push(<Card><Accordion.Toggle as={Card.Header} eventKey={i}>{sec[i]}</Accordion.Toggle><Accordion.Collapse eventKey={i}><Card.Body>{this.getBody(secBody[i])}<Card.Text>{this.getTimes(secBody[i])}</Card.Text>{this.getButton(sec[i])} {this.getTagS(secBody[i])}</Card.Body></Accordion.Collapse></Card>);
             }
             return listG;
         } 
@@ -37,6 +37,20 @@ class CourseInfo extends React.Component {
         return s;
     }
 
+    getButton (element) {
+        return <Button className="addToCart" onClick={()=>this.addToCart(element)}>Add To Cart</Button>;
+    }
+
+    getSButton (element) {
+       console.log(element);
+       return <Button className="addToCart" onClick={()=>this.addToCart(element)}>Add To Cart</Button>;
+    }
+
+    addToCart () {
+        this.props.setCart(this.props.data);
+        
+    }
+
     getTimes(data) {
         let day = Object.keys(data.time);
         let time = Object.values(data.time);
@@ -47,11 +61,10 @@ class CourseInfo extends React.Component {
         return s;
     }
 
-    getSBody (data) {
-        console.log(data);
-        var s = data.location;
-        return s;
-    }
+    // getSBody (data) {
+    //     var s = data.location;
+    //     return s;
+    // }
 
     getTagS (data) {
         let subs = Object.keys(data.subsections);
@@ -67,9 +80,11 @@ class CourseInfo extends React.Component {
             let listS = [];
             let subs = Object.keys(data.subsections);
             let subBody = Object.values(data.subsections);
+            let subsec = Object.entries(data.subsections);
+
             if (subs.length > 0) {
                 for (var i = 0; i < subs.length; i++) {
-                    listS.push(<Card><Accordion.Toggle as={Card.Header} eventKey={i}>{subs[i]}</Accordion.Toggle><Accordion.Collapse eventKey={i}><Card.Body>{subBody[i].location}<Card.Text>{this.getTimes(subBody[i])}</Card.Text></Card.Body></Accordion.Collapse></Card>);
+                    listS.push(<Card><Accordion.Toggle as={Card.Header} eventKey={i}>{subs[i]}</Accordion.Toggle><Accordion.Collapse eventKey={i}><Card.Body>{subBody[i].location}<Card.Text>{this.getTimes(subBody[i])} {this.getSButton(subsec[i])}</Card.Text></Card.Body></Accordion.Collapse></Card>);
                 }
                 return listS;
             }
@@ -83,7 +98,7 @@ class CourseInfo extends React.Component {
            <Card>
                 <Card.Title>{this.props.data.name}</Card.Title>
                 <Card.Subtitle>{this.getSubTitle()}</Card.Subtitle>
-                <Card.Text>{this.props.data.description}</Card.Text>
+                <Card.Text>{this.props.data.description} {this.getButton(this.props.data)}</Card.Text>
                 <Accordion defaultActiveKey="0">
                     {this.getListG()}
                 </Accordion>
