@@ -15,7 +15,7 @@ class App extends React.Component {
       filteredCourses: {},
       subjects: [],
       currCourse: {},
-      addedItems: {}
+      addedItems: {},
     };
   }
 
@@ -46,11 +46,48 @@ class App extends React.Component {
   }
 
   setCart(data) {
-    let addedItems = [];
-    addedItems.push(data);
-    console.log(data);
-    return addedItems;
-    //this.setState({addedItems: data});
+    if (data != null) {
+      //console.log(data);
+      let name = [];
+      name = data.name;
+      //const tempName = Object.assign(name);
+
+      // let rest = {};
+      // rest = data;
+      const tempRest = Object.assign(data);
+      // console.log(name);
+      // console.log(rest);
+
+      var newEntry = new Object({key:data.name, value: tempRest});
+      return newEntry;
+     // var entry = {key: name, value: tempRest};
+     // const tempEntry = Object.assign({},entry);
+      console.log("newEntry: ", newEntry);
+      //var curr = 0;
+      let s = [];
+      s.push(Object.assign({},newEntry));
+      this.setState({addedItems: s});
+      return;
+      console.log("S after push: ",s);
+      console.log("this.addedItems currently:", this.addedItems);
+      //this.addedItems.push(data);
+       if (this.addedItems == undefined) { 
+         this.addedItems = (s);
+       } else {
+         s.push(newEntry);
+         console.log("after pushing a second time:", s);
+         var m = 1;
+         while (this.addedItems[m] != null){
+           m++;
+         }
+         this.addedItems[(m-1)] = s;
+       }
+      ///this.addedItems.push(s);
+      console.log(this.addedItems);
+      //return addedItems;
+      //this.setState({addedItems: s});
+    }
+    
   }
 
   render() {
@@ -69,12 +106,12 @@ class App extends React.Component {
           <div style={{marginLeft: '20vw'}}>
             <CourseArea data={this.state.filteredCourses} setCurrCourse={(data)=> this.setCurrCourse(data)}/>
           </div>
-          <div style ={{marginLeft: '47vw', marginTop: '-201vw'}}>
-            <CourseInfo data={this.state.currCourse} setCart={(data)=> this.setCart(data)}/>
-          </div>
+        </Tab>
+        <Tab eventKey="courseInfo" title="Course Info">
+          <CourseInfo data={this.state.currCourse} setCart={(data)=> this.setCart(data)}/>
         </Tab>
         <Tab eventKey="cart" title="My Cart">
-          <Cart data={this.state.addedItems}> </Cart>
+          <Cart data={this.setCart()}> </Cart>
         </Tab>
         </Tabs>
         
