@@ -1,25 +1,29 @@
 import React from 'react';
 import './App.css';
 import Card from 'react-bootstrap/Card';
-import InfoButton from './InfoButton';
-import CourseInfo from './CourseInfo';
+import Button from 'react-bootstrap/Button';
 
 class Course extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     return (
-      <>
       <Card style={{width: '33%', marginTop: '5px', marginBottom: '5px'}}>
         <Card.Body>
           <Card.Title>{this.props.data.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{this.props.data.number} - {this.getCredits()}</Card.Subtitle>
-          <InfoButton GetButtonText={"See More Info"} GetButtonMoreInfo={this.props.data} setCurrCourse={(data)=> this.props.setCurrCourse(data)}/>  
+          <Button variant="primary" onClick={()=> this.sendInfo()}>Click Here, Then Click Course Info Tab</Button>
         </Card.Body>
       </Card>
-      </>
-    );
+    )
   }
-  
+
+  sendInfo(element) {
+    this.props.setCurrCourse(this.props.data);
+ }
+
   getCredits() {
     if(this.props.data.credits === 1)
       return '1 credit';

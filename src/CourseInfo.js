@@ -9,8 +9,7 @@ class CourseInfo extends React.Component {
         super(props);
 
     }
-   
-       
+    
     getListG() {
         let listG = [];
         //console.log(this.props.data.sections);
@@ -39,24 +38,18 @@ class CourseInfo extends React.Component {
 
     getButton (element) {
         
-             return <Button className="addToCart" onClick={()=>this.getJustSection(element)}>Add To Cart</Button>;
-        //return <Button className="addToCart" onClick={()=>this.addToCart(this.props.data)}>Add To Cart</Button>;
+        return <Button className="addToCart" onClick={()=>this.getJustSection(element)}>Add Lecture to Cart</Button>;
     }
 
     getHButton (element) {
-        return <Button className="addToCart" onClick={()=>this.addToCart(element)}>Add To Cart</Button>;
+        return <Button className="addToCart" onClick={()=>this.addToCart(element)}>Add Class to Cart</Button>;
     }
 
     getSButton (name,data,element) {
-       //console.log(element);
-       return <Button className="addToCart" onClick={()=>this.getJustSSection(name,data,element)}>Add To Cart</Button>;
+       return <Button className="addToCart" onClick={()=>this.getJustSSection(name,data,element)}>Add Discussion to Cart</Button>;
     }
 
     getJustSSection(name,data,element) {
-               
-        
-         //console.log("the ele: ", element[0]);
-         //console.log("the data: ", data);
         if (this.props.data.sections != undefined) {
             var clone = JSON.parse(JSON.stringify(this.props.data));
             var sec = Object.entries(clone.sections);
@@ -150,11 +143,6 @@ class CourseInfo extends React.Component {
         return s;
     }
 
-    // getSBody (data) {
-    //     var s = data.location;
-    //     return s;
-    // }
-
     getTagS (name,data) {
         let subs = Object.keys(data.subsections);
         if (subs.length > 0) {
@@ -195,40 +183,6 @@ class CourseInfo extends React.Component {
             
        )
    }
-   /*
-   function Example() {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  return (
-    <>
-      <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
-}
-
-render(<Example />);
-   */
-  
 }
 
 export default CourseInfo;

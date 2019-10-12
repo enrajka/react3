@@ -11,6 +11,7 @@ class CourseArea extends React.Component {
         <Course key={course[0]} data={course[1]} setCurrCourse={(data)=> this.props.setCurrCourse(data)}/>
       )
     }
+
     return courses;
   }
 
