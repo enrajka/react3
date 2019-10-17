@@ -1,5 +1,5 @@
 class SearchAndFilter {
- 
+  
   createChips(search) {
     let keywordsList =["psychology","behavior", "emotion", "intelligence", "brain","computer","science", "operating", "system","systems","programming", "java", "chemistry", "math", "mathematics", 
     "algebra", "trigonometry", "social",   "interaction",   "engineering",  "calculus",   "analytical",  "geometry", 
@@ -16,35 +16,52 @@ class SearchAndFilter {
   }
 
   searchAndFilter(currTags,courses, search, subject, minimumCredits, maximumCredits) {
-    if(search !== '') {
-      let coursesAfterSearch = [];
-      
-      // for (var tag of currTags) {
-      //   for (const course of Object.values(courses)) {
-      //     for(const keyword of course.keywords) {
-      //         if(keyword !== tag) {
-      //           coursesAfterSearch.splice(coursesAfterSearch.indexOf(course),1);//pop(course);
-                
-      //         }
-      //     }
-      //   }
-      // }
 
-     // this.createChips(search); 
-    for(const course of Object.values(courses)) {
-      for(const keyword of course.keywords) {
-          if(keyword === (search)) {
+    if(currTags.length !== 0) {
+      let coursesAfterSearch = [];
+      for(const course of Object.values(courses)) {
+        for(const keyword of course.keywords) {
+          if (currTags.indexOf(keyword) !== -1) { 
+            //need to go through all keywords and make sure that contains all the cyrrTags
+            console.log(course + " includes a keyword in tags: " + currTags + " so it is displayed");
             coursesAfterSearch.push(course);
             break;
           }
-          // if (currTags.includes(keyword)) {
-          //   coursesAfterSearch.push(course);
-          //   break;
-          // }
+        }
       }
-    }
+
       courses = coursesAfterSearch;
-  }
+    }
+
+  //   if(search !== '') {
+  //     let coursesAfterSearch = [];
+      
+  //     // for (var tag of currTags) {
+  //     //   for (const course of Object.values(courses)) {
+  //     //     for(const keyword of course.keywords) {
+  //     //         if(keyword !== tag) {
+  //     //           coursesAfterSearch.splice(coursesAfterSearch.indexOf(course),1);//pop(course);
+                
+  //     //         }
+  //     //     }
+  //     //   }
+  //     // }
+
+  //    // this.createChips(search); 
+  //   for(const course of Object.values(courses)) {
+  //     for(const keyword of course.keywords) {
+  //         if(keyword === (search)) {
+  //           coursesAfterSearch.push(course);
+  //           break;
+  //         }
+  //         // if (currTags.includes(keyword)) {
+  //         //   coursesAfterSearch.push(course);
+  //         //   break;
+  //         // }
+  //     }
+  //   }
+  //     courses = coursesAfterSearch;
+  // }
 
     if(subject !== 'All') {
       let coursesAfterSubject = [];

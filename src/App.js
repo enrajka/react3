@@ -66,15 +66,15 @@ class App extends React.Component {
     }
   }
 
-  removeTag(tag) {
-    let tempItems = [];
-    for (let t = 0; t < this.state.currTags.length; t++) {
-      if (this.state.currTags[t] !== tag) {
-        tempItems.push(this.state.currTags[t]);
-      }
-    }
-    this.setState({currTags: tempItems});
-  }
+  // removeTag(tag) {
+  //   let tempItems = [];
+  //   for (let t = 0; t < this.state.currTags.length; t++) {
+  //     if (this.state.currTags[t] !== tag) {
+  //       tempItems.push(this.state.currTags[t]);
+  //     }
+  //   }
+  //   this.setState({currTags: tempItems});
+  // }
 
   setCart(data) {
     if (data != null) {
@@ -203,7 +203,7 @@ class App extends React.Component {
         
        <Tabs defaultActiveKey="courseSearch" id="tabs">
           <Tab eventKey="courseSearch" title="Course Search">
-            <Sidebar setCourses={(courses) => this.setCourses(courses)} courses={this.state.allCourses} subjects={this.state.subjects} setTags={this.setTags.bind(this)} currTags={this.state.currTags} removeTag={this.removeTag.bind(this)} />
+            <Sidebar setCourses={(courses) => this.setCourses(courses)} courses={this.state.allCourses} subjects={this.state.subjects} setTags={this.setTags.bind(this)}/>
             <div style={{marginLeft: '20vw'}}>
               <CourseArea data={this.state.filteredCourses} setCurrCourse={(data)=> this.setCurrCourse(data)}/>
               <CourseInfo data={this.state.currCourse} setCart={this.setCart.bind(this)}/>

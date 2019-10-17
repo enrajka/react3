@@ -13,13 +13,16 @@ class Sidebar extends React.Component {
     this.minimumCredits = React.createRef();
     this.maximumCredits = React.createRef();
     this.search = React.createRef();
-    
+    this.state = {
+      currTags: []
+    };
   }
 
   setCourses() {
-    console.log("the currTags are: ", this.props.currTags);
-    this.props.setCourses(this.searchAndFilter.searchAndFilter(this.props.currTags, this.props.courses, this.search.current.value, this.subject.current.value, this.minimumCredits.current.value, this.maximumCredits.current.value));
+    //console.log("the currTags before are: ", this.state.currTags);
     this.setChipList(this.searchAndFilter.createChips(this.search.current.value));
+    console.log("the currTags after are: ", this.state.currTags);
+    this.props.setCourses(this.searchAndFilter.searchAndFilter(this.state.currTags, this.props.courses, this.search.current.value, this.subject.current.value, this.minimumCredits.current.value, this.maximumCredits.current.value));
     
   }
 
@@ -37,33 +40,46 @@ class Sidebar extends React.Component {
 
     return subjectOptions;
   }
-  
+
   setChipList(data) {
     //console.log("reaching here", data);
     this.props.setTags(data);
-    // if (data != "none") {
-    //   var currChips = this.state.chipsAdded;
-    //   currChips.push(data);
-    //   this.setState({chipsAdded: currChips});
-    // }
-   
+    if (data != "none" && data != null) {
+      // var currChips = this.state.currTags;
+      // currChips.push(data);
+      // this.setState({currTags: currChips});
+      var dontAdd = 0;
+
+      for (let t = 0; t < this.state.currTags.length; t++) {
+        if (this.state.currTags[t] === data) {
+          dontAdd = 1;
+        }
+      }
+      if (dontAdd === 0) {
+        var currT = this.state.currTags;
+        currT.push(data);
+        this.setState({currTags: currT});
+      }
+    }
+    // console.log(this.state.currTags);
   }
 
-  // onChipDelete(chipName) {
-  //     console.log("Deleting ", chipName);
-  //    // console.log(this.state);
-  //     let tempChips = [];
-  //     if (this.state != undefined) {
-  //       if (chipName != null) {
-  //         for (let x = 0; x < this.state.chipsAdded.length; x++) {
-  //           if (this.state.chipsAdded[x] !== chipName) {
-  //             tempChips.push(this.state.chipsAdded[x]);
-  //           }
-  //         }
-  //         this.setState({chipsAdded: tempChips});
-  //       }
-  //     }
-  // }
+  removeTag(tag) {
+    let tempItems = [];
+    console.log(this.state.currTags.length);
+    for (let t = 0; t < this.state.currTags.length; t++) {
+      console.log(this.state.currTags[t] +" !== " + tag);
+      if (this.state.currTags[t] !== tag) {
+        tempItems.push(this.state.currTags[t]);
+      }
+    }
+    // console.log("tempItems ", tempItems);
+    // console.log("before delete:",this.state.currTags);
+    //this.setState({currTags: tempItems});
+    this.state.currTags = tempItems;
+    //this.setState({currTags: tempItems});
+    // console.log("after delete:",this.state.currTags);
+  }
 
   render() {
     return (
@@ -95,7 +111,7 @@ class Sidebar extends React.Component {
                 </Form.Group>
               </div>
             </Form>
-            <ChipArea chips={this.props.currTags} removeTag={this.props.removeTag}/>
+            <ChipArea chips={this.state.currTags} removeTag={this.removeTag.bind(this)}/>
           </Card.Body>
         </Card>
       </>
