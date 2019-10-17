@@ -8,7 +8,7 @@ class ChipArea extends React.Component {
   getChips() {
     let chips =[];
     for(const tag of Object.values(this.props.chips)) {
-      chips.push(<Chip key={tag} title={tag} onChipDelete={this.props.onChipDelete}/>);
+      chips.push(<Chip key={tag} title={tag} removeTag={this.props.removeTag}/>);
     }
     return chips;
   }

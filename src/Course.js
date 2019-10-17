@@ -14,7 +14,7 @@ class Course extends React.Component {
         <Card.Body>
           <Card.Title>{this.props.data.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{this.props.data.number} - {this.getCredits()}</Card.Subtitle>
-          <Button variant="primary" onClick={()=> this.sendInfo()}>Click Here, Then Click Course Info Tab</Button>
+          <Button variant="primary" onClick={()=> this.sendInfo()}>Click Here, Then Scroll To Bottom</Button>
         </Card.Body>
       </Card>
     )

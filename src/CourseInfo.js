@@ -37,7 +37,6 @@ class CourseInfo extends React.Component {
     }
 
     getButton (element) {
-        
         return <Button className="addToCart" onClick={()=>this.getJustSection(element)}>Add Lecture to Cart</Button>;
     }
 

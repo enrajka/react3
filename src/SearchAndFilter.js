@@ -15,20 +15,36 @@ class SearchAndFilter {
     return "none";
   }
 
-  searchAndFilter(courses, search, subject, minimumCredits, maximumCredits) {
+  searchAndFilter(currTags,courses, search, subject, minimumCredits, maximumCredits) {
     if(search !== '') {
       let coursesAfterSearch = [];
+      
+      // for (var tag of currTags) {
+      //   for (const course of Object.values(courses)) {
+      //     for(const keyword of course.keywords) {
+      //         if(keyword !== tag) {
+      //           coursesAfterSearch.splice(coursesAfterSearch.indexOf(course),1);//pop(course);
+                
+      //         }
+      //     }
+      //   }
+      // }
 
-      for(const course of Object.values(courses)) {
-        for(const keyword of course.keywords) {
+     // this.createChips(search); 
+    for(const course of Object.values(courses)) {
+      for(const keyword of course.keywords) {
           if(keyword === (search)) {
             coursesAfterSearch.push(course);
             break;
           }
-        }
+          // if (currTags.includes(keyword)) {
+          //   coursesAfterSearch.push(course);
+          //   break;
+          // }
       }
-      courses = coursesAfterSearch;
     }
+      courses = coursesAfterSearch;
+  }
 
     if(subject !== 'All') {
       let coursesAfterSubject = [];

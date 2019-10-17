@@ -3,6 +3,7 @@ import './App.css';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import SearchAndFilter from './SearchAndFilter';
+import ChipArea from './ChipArea';
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -12,10 +13,14 @@ class Sidebar extends React.Component {
     this.minimumCredits = React.createRef();
     this.maximumCredits = React.createRef();
     this.search = React.createRef();
+    
   }
 
   setCourses() {
-    this.props.setCourses(this.searchAndFilter.searchAndFilter(this.props.courses, this.search.current.value, this.subject.current.value, this.minimumCredits.current.value, this.maximumCredits.current.value));
+    console.log("the currTags are: ", this.props.currTags);
+    this.props.setCourses(this.searchAndFilter.searchAndFilter(this.props.currTags, this.props.courses, this.search.current.value, this.subject.current.value, this.minimumCredits.current.value, this.maximumCredits.current.value));
+    this.setChipList(this.searchAndFilter.createChips(this.search.current.value));
+    
   }
 
   handleCreditsKeyDown(e) {
@@ -32,6 +37,33 @@ class Sidebar extends React.Component {
 
     return subjectOptions;
   }
+  
+  setChipList(data) {
+    //console.log("reaching here", data);
+    this.props.setTags(data);
+    // if (data != "none") {
+    //   var currChips = this.state.chipsAdded;
+    //   currChips.push(data);
+    //   this.setState({chipsAdded: currChips});
+    // }
+   
+  }
+
+  // onChipDelete(chipName) {
+  //     console.log("Deleting ", chipName);
+  //    // console.log(this.state);
+  //     let tempChips = [];
+  //     if (this.state != undefined) {
+  //       if (chipName != null) {
+  //         for (let x = 0; x < this.state.chipsAdded.length; x++) {
+  //           if (this.state.chipsAdded[x] !== chipName) {
+  //             tempChips.push(this.state.chipsAdded[x]);
+  //           }
+  //         }
+  //         this.setState({chipsAdded: tempChips});
+  //       }
+  //     }
+  // }
 
   render() {
     return (
@@ -63,6 +95,7 @@ class Sidebar extends React.Component {
                 </Form.Group>
               </div>
             </Form>
+            <ChipArea chips={this.props.currTags} removeTag={this.props.removeTag}/>
           </Card.Body>
         </Card>
       </>

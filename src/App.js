@@ -17,6 +17,7 @@ class App extends React.Component {
       filteredCourses: {},
       currCourse: {},
       addedItems: [],
+      currTags: [],
       subjects: []
     };
   }
@@ -47,11 +48,53 @@ class App extends React.Component {
     this.setState({filteredCourses: courses})
   }
 
+  setTags(tag) {
+    if (tag != "none" && tag != null) {
+      var dontAdd = 0;
+
+      for (let t = 0; t < this.state.currTags.length; t++) {
+        if (this.state.currTags[t] === tag) {
+          dontAdd = 1;
+        }
+      }
+      if (dontAdd === 0) {
+        var currT = this.state.currTags;
+        currT.push(tag);
+        this.setState({currTags: currT});
+      }
+      //console.log(this.state.currTags);
+    }
+  }
+
+  removeTag(tag) {
+    let tempItems = [];
+    for (let t = 0; t < this.state.currTags.length; t++) {
+      if (this.state.currTags[t] !== tag) {
+        tempItems.push(this.state.currTags[t]);
+      }
+    }
+    this.setState({currTags: tempItems});
+  }
+
   setCart(data) {
     if (data != null) {
       var currCart = this.state.addedItems;
-      currCart.push({data});
-     this.setState({addedItems: currCart});
+      //if (this.state.addedItems.contains)
+      console.log("the data being added: ",data);
+      var dontAdd = 0;
+
+      //Right now just checks if its already in the cart and if so dont re-add it 
+      for (var i = 0; i < this.state.addedItems.length; i++) {
+        //check if the course is already in the cart
+        if (this.state.addedItems[i].data.name === data.name) {
+          dontAdd = 1;
+        }
+      }
+
+      if (dontAdd === 0) {
+        currCart.push({data});
+        this.setState({addedItems: currCart});
+      }
     }
   }
 
@@ -160,14 +203,12 @@ class App extends React.Component {
         
        <Tabs defaultActiveKey="courseSearch" id="tabs">
           <Tab eventKey="courseSearch" title="Course Search">
-            <Sidebar setCourses={(courses) => this.setCourses(courses)} courses={this.state.allCourses} subjects={this.state.subjects}/>
+            <Sidebar setCourses={(courses) => this.setCourses(courses)} courses={this.state.allCourses} subjects={this.state.subjects} setTags={this.setTags.bind(this)} currTags={this.state.currTags} removeTag={this.removeTag.bind(this)} />
             <div style={{marginLeft: '20vw'}}>
               <CourseArea data={this.state.filteredCourses} setCurrCourse={(data)=> this.setCurrCourse(data)}/>
-            </div>
-          </Tab>
-          <Tab eventKey="currCourse" title="Course Info">
-            <CourseInfo data={this.state.currCourse} setCart={this.setCart.bind(this)}/>
-          </Tab>
+              <CourseInfo data={this.state.currCourse} setCart={this.setCart.bind(this)}/>
+            </div> 
+          </Tab> 
           <Tab eventKey="cart" title="My Cart">
               <Cart display={this.displayCart()}/>
           </Tab>
