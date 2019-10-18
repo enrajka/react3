@@ -6,7 +6,7 @@ With this assignment, you have two options for the project you build. Option 1 i
 
 ## Course data
 
-The course data is being fetched from `https://mysqlcs639.cs.wisc.edu:5000/classes/` and is formatted as follows:
+The course data is being fetched from 'https://mysqlcs639.cs.wisc.edu/students/5022025924/classes/completed/' and is formatted as follows:
 
 ```
 {
@@ -52,7 +52,7 @@ Your project must be able to accept any data with the same format as above and t
 
 ## Problem 1
 
-Load in a json file of previous courses located at `https://mysqlcs639.cs.wisc.edu:5000/previouscourses/`. The user should be able to view the contents at this url as courses that the user has previously taken.
+Load in a json file of previous courses located at `https://mysqlcs639.cs.wisc.edu/students/5022025924/classes/completed/`. The user should be able to view the contents at this url as courses that the user has previously taken.
   
 ## Problem 2
 
