@@ -77,7 +77,7 @@ class Sidebar extends React.Component {
     // console.log("before delete:",this.state.currTags);
     //this.setState({currTags: tempItems});
     this.state.currTags = tempItems;
-    //this.setState({currTags: tempItems});
+    this.setState({currTags: tempItems});
     // console.log("after delete:",this.state.currTags);
   }
 

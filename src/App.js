@@ -4,7 +4,11 @@ import Sidebar from './Sidebar';
 import Cart from './Cart';
 import CourseArea from './CourseArea';
 import CourseInfo from './CourseInfo';
+import AreasOfInterest from './AreasOfInterest';
+import PrevCourseArea from './PrevCourseArea';
+import RecomCourses from './RecomCourses';
 import Tabs from 'react-bootstrap/Tabs';
+import Recommend from './Recommend';
 import Tab from 'react-bootstrap/Tab';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -205,12 +209,15 @@ class App extends React.Component {
           <Tab eventKey="courseSearch" title="Course Search">
             <Sidebar setCourses={(courses) => this.setCourses(courses)} courses={this.state.allCourses} subjects={this.state.subjects} setTags={this.setTags.bind(this)}/>
             <div style={{marginLeft: '20vw'}}>
-              <CourseArea data={this.state.filteredCourses} setCurrCourse={(data)=> this.setCurrCourse(data)}/>
-              <CourseInfo data={this.state.currCourse} setCart={this.setCart.bind(this)}/>
+                <CourseArea data={this.state.filteredCourses} setCurrCourse={(data)=> this.setCurrCourse(data)}/>
+                <CourseInfo data={this.state.currCourse} setCart={this.setCart.bind(this)}/>             
             </div> 
           </Tab> 
           <Tab eventKey="cart" title="My Cart">
               <Cart display={this.displayCart()}/>
+          </Tab>
+          <Tab eventKey="recommend" title="Recommended Courses" style={{display: 'flex', flexDirection: 'row'}}>
+              <Recommend/>
           </Tab>
         </Tabs>
       </>

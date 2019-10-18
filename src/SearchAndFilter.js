@@ -16,20 +16,52 @@ class SearchAndFilter {
   }
 
   searchAndFilter(currTags,courses, search, subject, minimumCredits, maximumCredits) {
-
+    console.log("at state of searc: ",currTags);
     if(currTags.length !== 0) {
+      var add = 0;
+      var currIndex = 0;
       let coursesAfterSearch = [];
       for(const course of Object.values(courses)) {
-        for(const keyword of course.keywords) {
-          if (currTags.indexOf(keyword) !== -1) { 
-            //need to go through all keywords and make sure that contains all the cyrrTags
-            console.log(course + " includes a keyword in tags: " + currTags + " so it is displayed");
-            coursesAfterSearch.push(course);
-            break;
-          }
+        //console.log("keywords: ", course.keywords);
+        //console.log("tags: ",currTags);
+        for (const tag of currTags) {
+          console.log("")
+          // if (course.keywords.indexOf(tag) === -1) {
+          //   console.log("not in course keywords");
+          // }
         }
       }
-
+        // while(currIndex < currTags.length) {
+        //   if (course.keywords.indexOf(currTags[currIndex]) !== -1) {
+        //     console.log(course.name + " contains keyword" + currTags[currIndex]);
+        //   }
+        //   currIndex++;
+        // }
+        // for (var i = 0; i < currTags.length;i++) {
+        //   if (course.keywords.indexOf(currTags[i]) === -1) {
+        //     add = 1;
+        //   }
+        //   if (add === 0) {
+        //     coursesAfterSearch.push(course);
+        //   }
+        // }
+        // for (var i = 0; i < course.keywords.length;i++) {
+        //   if (currTags.indexOf(course.keywords[i]) === -1) {
+        //     add = 1;
+        //   }
+        // }
+        
+        // for(const keyword of course.keywords) {
+        //   // if (currTags.indexOf(keyword) !== -1) { 
+        //   //   //need to go through all keywords and make sure that contains all the cyrrTags
+        //   //   console.log(course + " includes a keyword in tags: " + currTags + " so it is displayed");
+        //   //   coursesAfterSearch.push(course);
+        //   //   break;
+        //   // }
+        //   for (var i = 0; i < currTags.length;i++) {
+        //     if (currTags[i])
+        //   }
+        // }
       courses = coursesAfterSearch;
     }
 
